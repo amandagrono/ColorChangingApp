@@ -3,6 +3,7 @@ package com.example.colorchangingapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -16,7 +17,9 @@ public class PalleteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pallete);
 
-        final String[] colorArray = {"Blue","Cyan","Gray","Green", "Light Gray", "Magenta", "Teal", "Orange", "Periwinkle", "Yellow", "Lime", "Purple"};
+
+        Resources res = this.getResources();
+        final String[] colorArray = res.getStringArray(R.array.colorStrings);
         final int[] colorInts = {Color.BLUE, Color.CYAN, Color.GRAY, Color.GREEN, Color.LTGRAY, Color.MAGENTA, Color.parseColor("#289C8E"/*teal*/), Color.parseColor("#FFAE32"/*orange*/), Color.parseColor("#CCCCFF"/*periwinkle*/), Color.YELLOW, Color.parseColor("#93FF00")/*lime*/, Color.parseColor("#751A9C")/*purple*/ };
 
         ColorAdapter colorAdapter = new ColorAdapter(this, colorArray, colorInts);
