@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Application de changement de couleur</string>
+    <string name="pallete_activity">Activité de la palette</string>
+    <string name="color_activity">Activité de couleur</string>
+    <string name="title_display">Cliquez sur une couleur pour lancer le canevas</string>
+    <string-array name="colorStrings">
+        <item>Bleue</item>
+        <item>Cyan</item>
+        <item>Gris</item>
+        <item>Vert</item>
+        <item>Gris clair</item>
+        <item>Magenta</item>
+        <item>Sarcelle</item>
+        <item>Orange</item>
+        <item>Pervenche</item>
+        <item>Jaune</item>
+        <item>Citron vert</item>
+        <item>Violet</item>
+    </string-array>
+</resources>
