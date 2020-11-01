@@ -1,5 +1,6 @@
 package com.example.colorchangingapp;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.GridView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,8 +18,7 @@ import android.view.ViewGroup;
  */
 public class PaletteFragment extends Fragment {
 
-    private int[] colorsInt;
-    private String[] colors;
+    clickedAButton mainActivity;
 
     public PaletteFragment() {
         // Required empty public constructor
@@ -35,7 +37,19 @@ public class PaletteFragment extends Fragment {
         return fragment;
     }
 
+    @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+        if(context instanceof clickedAButton){
+            mainActivity = (clickedAButton) context;
 
+        }
+        else{
+            throw new ClassCastException(context.toString() + "must implement clickedAButton");
+        }
+
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,8 +57,27 @@ public class PaletteFragment extends Fragment {
         // Inflate the layout for this fragment
         View l = inflater.inflate(R.layout.fragment_palette, container, false);
 
+        GridView gv = l.findViewById(R.id.gridview);
+        gv.setNumColumns(3);
+        gv.setAdapter(new ColorAdapter(this.getContext(), this.getArguments().getStringArray("Colors"), this.getArguments().getIntArray("ColorsInt")));
+
+        final String[] colors = this.getArguments().getStringArray("Colors");
+        final int[] colorsInt = this.getArguments().getIntArray("ColorsInt");
+
+        gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mainActivity.colorPicked(colors[position], colorsInt[position]);
+            }
+        });
 
 
         return l;
+    }
+
+    public interface clickedAButton{
+
+        void colorPicked(String colorPicked, int colorInt);
+
     }
 }
